@@ -4,4 +4,12 @@ const stduent = {
     school:"jhons"
 }
 
-module.exports = stduent;
+class stduent{
+    constructor(name, town)
+    {
+        this.name = name;
+        this.town = town;
+    }
+}
+
+export default stduent;

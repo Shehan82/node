@@ -1,2 +1,2 @@
-const student = require('./student');
+const student = require('./student').default;
 console.log(student);     
