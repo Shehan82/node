@@ -12,4 +12,10 @@ const path = require('path');
 fs.writeFile(path.join(__dirname, '/hello', 'hi.txt'), 'hello i am hello how are you hi', (err) => {
     if(err) throw err;
     console.log("written in file");
-})
+
+    fs.appendFile(path.join(__dirname, '/hello', 'hi.txt'), 'hello i am hello how are you hiafkasfjak121 i am appended one', (err) => {
+        if(err) throw err;
+        console.log("written in file");
+    }) 
+}) 
+
