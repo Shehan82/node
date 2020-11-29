@@ -1,2 +1,4 @@
-const student = require('./student').default;
-console.log(student);     
+const Student = require('./student');
+
+let student1 = new Student("shehan", "jf");
+student1.details();   

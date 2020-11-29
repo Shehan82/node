@@ -1,15 +1,21 @@
-const stduent = {
-    name:"shehan",
-    age:23,
-    school:"jhons"
-}
+// const stduent = {
+//     name:"shehan",
+//     age:23,
+//     school:"jhons"
+// }
 
-class stduent{
+class Student{
     constructor(name, town)
     {
         this.name = name;
         this.town = town;
     }
+
+    details()
+    {
+        // console.log("Helloo " + this.name );
+        console.log(`hello this is ${this.name}`);
+    }
 }
 
-export default stduent;
+module.exports = Student;
