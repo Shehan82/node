@@ -6,9 +6,23 @@
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
+const { dirname } = require('path');
 
 const server = http.createServer((req, res) => {
-     res.write("hello how are you!");
+    const filePath = path.join(__dirname, '/public',
+         req.url === '/' ? 'index.html' : req.url
+    )
+
+    fs.readFile(filePath, (err, data)=>{
+        if(err == 'ENOENT')
+        {
+            fs.readFile(path.join(__dirname, '/public', '404.html'), (err, data)=>{
+                res.writeHead(200, {'content-type' : 'text/html'});
+                res.end(data);
+            })
+        }
+    })
+    console.log(filePath);
 });
 
 const PORT = process.env.PORT || 5000;
