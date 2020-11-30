@@ -9,18 +9,50 @@ const fs = require('fs');
 const { dirname } = require('path');
 
 const server = http.createServer((req, res) => {
+
     const filePath = path.join(__dirname, '/public',
          req.url === '/' ? 'index.html' : req.url
     )
 
+    const extension = path.extname(filePath);
+
+    const cType = 'text/html';
+
+    switch(extension)
+    {
+        case '.js':
+            cType = 'text/js';
+            break;
+        case '.css':
+            cType = 'text/css';
+            break;
+    }
+
     fs.readFile(filePath, (err, data)=>{
-        if(err == 'ENOENT')
+        
+        if(err)
         {
-            fs.readFile(path.join(__dirname, '/public', '404.html'), (err, data)=>{
-                res.writeHead(200, {'content-type' : 'text/html'});
-                res.end(data);
-            })
+            if(err.code == 'ENOENT')
+            {
+                fs.readFile(path.join(__dirname, '/public', '404.html'), (err, data)=>{
+                    res.writeHead(200, {'content-type' : 'text/html'});
+                    res.end(data);
+                })
+            }
+            else
+            {
+                fs.readFile(path.join(__dirname, '/public', 'error.html'), (err, data)=>{
+                    res.writeHead(200, {'content-type' : 'text/html'});
+                    res.end(data);
+                })
+            }
         }
+        else
+        {
+            res.writeHead(200, {'content-type' : cType});
+            res.end(data, 'utf-8');
+        }
+       
     })
     console.log(filePath);
 });
